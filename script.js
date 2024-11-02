@@ -43,6 +43,12 @@ btnSubTask.addEventListener('click', (event) => {
     const status = document.getElementById("taskStatus").value;
     const priority = document.getElementById("taskPriority").value;
 
+
+    if (!title || !dueDate || !description || !status || !priority) {
+        alert("Veuillez remplir tous les champs pour ajouter une tache.");
+        return; 
+    }
+
     const taskData = {
         tasktitle: title,
         taskdueDate: dueDate,
@@ -115,7 +121,7 @@ function editTask(index) {
 
 function afficherTasks() {
     document.getElementById("todoTasks").innerHTML = '';
-    document.getElementById("inprogressTasksContainer").innerHTML = '';
+    document.getElementById("inprogressTasks").innerHTML = '';
     document.getElementById("doneTasks").innerHTML = '';
 
     tasks.forEach((task, index) => {
@@ -133,7 +139,7 @@ function afficherTasks() {
         if (task.taskstatus === "Todo") {
             document.getElementById("todoTasks").appendChild(taskElement);
         } else if (task.taskstatus === "Inprogress") {
-            document.getElementById("inprogressTasksContainer").appendChild(taskElement);
+            document.getElementById("inprogressTasks").appendChild(taskElement);
         } else if (task.taskstatus === "Done") {
             document.getElementById("doneTasks").appendChild(taskElement);
         }
@@ -148,7 +154,7 @@ function PriorityColor(taskpriority) {
         return "border-red-500";
     } else if (taskpriority === "P2") {
         return "border-yellow-500";
-    } else if (taskpriority === "P2") {
+    } else if (taskpriority === "P3") {
         return "border-green-500";
     }
 }
