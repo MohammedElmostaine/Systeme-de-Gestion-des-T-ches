@@ -155,29 +155,7 @@ function editTask(index) {
 
 
 
-const filterPriority = document.getElementById("filterPriority");
-const sortTasks = document.getElementById("sortTasks");
-
-filterPriority.addEventListener("change", afficherTasks);
-sortTasks.addEventListener("change", afficherTasks);
-
 function afficherTasks() {
-    const selectedPriority = filterPriority.value;
-    const sortOption = sortTasks.value;
-
-    let filteredTasks = tasks.filter(task => {
-        return selectedPriority ? task.taskpriority === selectedPriority : true;
-    });
-
-    if (sortOption === "date") {
-        filteredTasks.sort((a, b) => new Date(a.taskdueDate) - new Date(b.taskdueDate));
-    } else if (sortOption === "priority") {
-        filteredTasks.sort((a, b) => {
-            const priorities = { P1: 1, P2: 2, P3: 3 };
-            return priorities[a.taskpriority] - priorities[b.taskpriority];
-        });
-    }
-
     document.getElementById("todoTasks").innerHTML = '';
     document.getElementById("inprogressTasks").innerHTML = '';
     document.getElementById("doneTasks").innerHTML = '';
@@ -185,17 +163,17 @@ function afficherTasks() {
     let InprogressCountt = 0;
     let doneCountt = 0;
 
-    filteredTasks.forEach((task, index) => {
+    tasks.forEach((task, index) => {
         const taskElement = document.createElement("div");
-        taskElement.className = `border-l-8 border-2 p-1 bg-white ${PriorityColor(task.taskpriority)} rounded-md min-h-32 flex flex-col justify-between mb-6`;
+        taskElement.className = ` border-l-8 border-2 p-1 bg-white ${PriorityColor(task.taskpriority)} rounded-md min-h-32 flex flex-col justify-between mb-6 `;
         taskElement.innerHTML = `
             <div class="flex justify-between"><h1 class="text-lg font-bold mt-2 ml-2">${task.tasktitle}</h1><span>${task.taskpriority}</span></div>
             <p class="text-sm font-medium text-gray-600 ml-2">${task.taskdescription}</p>
             <div class="flex justify-between gap-3">
             <p class="text-sm text-gray-600">Échéance: ${task.taskdueDate}</p>
             <div class="flex justify-end gap-3">
-                <button class="text-white" onclick="editTask(${index})"><i class="fa-regular fa-pen-to-square" style="color: #74C0FC;"></i></button>
-                <button class="text-white" onclick="deleteTask(${index})"><i class="fa-solid fa-trash-can" style="color: #74C0FC;"></i></button>
+                <button class=" text-white " onclick="editTask(${index})"><i class="fa-regular fa-pen-to-square" style="color: #74C0FC;"></i></button>
+                <button class=" text-white " onclick="deleteTask(${index})"><i class="fa-solid fa-trash-can" style="color: #74C0FC;"></i></button>
                 </div>
             </div>`;
 
@@ -210,11 +188,11 @@ function afficherTasks() {
             doneCountt++;
         }
     });
-
     document.getElementById("todoCount").innerText = todoCountt;
     document.getElementById("InprogressCount").innerText = InprogressCountt;
     document.getElementById("doneCount").innerText = doneCountt;
 }
+
 
 
 
