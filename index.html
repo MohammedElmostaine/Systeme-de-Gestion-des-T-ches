@@ -4,20 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Document</title>
 </head>
-<body class="p-5">
-    <section class="w-full flex flex-col justify-between  p-2 md:flex-row  gap-7">
-        <button id= "btnadtasks" class="bg-blue-700 text-white  p-4 rounded hover:bg-blue-500 w-40"> Add Task +</button>
-        <div>
-        <input type="text" placeholder="Serch ..."   class="p-4 w-80  border border-black rounded-md">
-        <div class="">
-
-        </div>
-        </div>
+<body class="body bg-gray-200">
+    <section class="w-full bg-black flex flex-col justify-between  p-4 md:flex-row  gap-7">
+        <button id= "btnadtasks" class="bg-blue-700 text-white  p-2 rounded-full hover:bg-blue-500 w-40"> Add Task +</button>
+        
+        
     </section>
-    <section id="taskmodal"  class="bg-gray-700 bg-ful bg-opacity-90 fixed z-20 inset-0 flex justify-center items-center hidden">
-        <div class="bg-white w-96 rounded-md p-5 " >
+    <section id="taskmodal"  class="bg-gray-700 bg-ful bg-opacity-90 fixed z-10 inset-0 flex justify-center items-center hidden ">
+        <div id="taskmodal2" class="bg-white w-96 rounded-md p-5 " >
             <h1 class="text-2xl font-bold bla text-black mb-2  ">Add new task</h1>
             <hr class="mb-6 h-1 rounded-lg bg-gray-700">
             <form action="" class="flex flex-col justify-between">
@@ -39,24 +37,30 @@
                         <option value="P2" class="bg-orange-500 ">P2</option>
                         <option value="P3" class="bg-green-700 ">P3</option>
                      </select>
-
-                    <button type="submit" id="btnSubTask" class="bg-blue-700 text-white w-28 mt-1 rounded-md h-8">Add task</button>
-                    <button type="button" id= "btncancel" class="bg-gray-700 text-white w-28 mt-1 rounded-md h-8">Cancel</button>
+                    <div class=" flex justify-between ">
+                     <div>
+                        <button type="submit" id="btnSubTask" class="bg-green-500 text-white w-28 mt-1 rounded-md h-8">Apply</button>
+                    </div>
+                    <div class="flex flex-col items-end">
+                        <button type="submit" id="btnSubMorTask" class="bg-green-500 text-white w-40 mt-1 rounded-md h-8">Apply & Add task</button>
+                        <button type="button" id= "btncancel" class="bg-gray-700 text-white w-28 mt-1 rounded-md h-8">Cancel</button>
+                    </div>
+                    </div>
             </form>
         </div>
     </section>
-    <section id="editTaskmodal"  class="bg-gray-700 bg-ful bg-opacity-90 fixed z-20 inset-0 flex justify-center items-center hidden">
-        <div class="bg-white w-96 rounded-md p-5 " >
+    <section id="editTaskmodal"  class="bg-gray-700 bg-ful bg-opacity-90 fixed z-10 inset-0 flex justify-center items-center hidden">
+        <div class="bg-sky-200 w-96 rounded-md p-5 " >
             <h1 class="text-2xl font-bold bla text-black mb-2  ">Edit task</h1>
             <hr class="mb-6 h-1 rounded-lg bg-gray-700">
             <form action="" class="flex flex-col justify-between">
-                    <label class="block font-medium">Title:</label>
+                    <label for="editTaskTitle" class="block font-medium">Title:</label>
                     <input type="text" id="editTaskTitle" class="w-50 p-3 border border-black rounded-md" required>
-                    <label class="block font-medium">Description:</label>
+                    <label for="editTaskDescription" class="block font-medium">Description:</label>
                     <textarea name="" id="editTaskDescription" class="w-50 h-24 p-3 border border-black rounded-md text-ali" required></textarea>
-                    <label class="block font-medium">Date d’échéance:</label>
+                    <label for="editTaskDate" class="block font-medium">Date d’échéance:</label>
                     <input type="date" id="editTaskDate" class="w-50 p-3 border border-black rounded-md" required>
-                    <label class="block font-medium">Statu:</label>
+                    <label for="editTaskStatus" class="block font-medium">Statu:</label>
                      <select name="" id="editTaskStatus" class="border border-black rounded-md p-3 appearance-none bg-white" required>
                         <option value="Todo"  class="">To do</option>
                         <option value="Inprogress" class=" ">In progress</option>
@@ -69,41 +73,42 @@
                         <option value="P3" class="bg-green-700 ">P3</option>
                      </select>
 
-                    <button type="submit" id="btnSubEditTask" class="bg-blue-700 text-white w-28 mt-1 rounded-md h-8">Edit task</button>
-                    <button type="button" id= "btnEditcancel" class="bg-gray-700 text-white w-28 mt-1 rounded-md h-8">Cancel</button>
+                    <button type="submit" id="btnSubEditTask" class="bg-green-500 text-white w-28 mt-1 rounded-md h-8">Edit task</button>
+                    <button type="button" id= "btnEditcancel" class="bg-green-500 text-white w-28 mt-1 rounded-md h-8">Cancel</button>
             </form>
         </div>
         
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="h-max">
-            <span class="text-2xl font-bold">To do | </span><span class="text-2xl font-bold">0</span>
-            <hr class="mb-6 h-1.5 rounded-lg bg-gray-700">
+    <section class=" mb-20 grid grid-cols-1 md:grid-cols-3 gap-6 w-5/6 justify-self-center mt-8">
+        <div class=" border-2 border-black rounded-md min-h-96 bg-gray-300  p-3 mb-4">
+            <span class="text-2xl font-bold">To do | </span><span id="todoCount" class="text-2xl font-bold">0</span>
+            <hr class="mb-6 h-1 rounded-lg bg-gray-700">
             <div id="todoTasks">
             
             </div>
         </div>
-        <div>
-            <span class="text-2xl font-bold">In progress | </span><span class="text-2xl font-bold">0</span>
-            <hr class="mb-6 h-1.5 rounded-lg bg-gray-700">
+        <div class=" border-2 border-black rounded-md min-h-96 bg-gray-300  p-3 mb-4">
+            <span class="text-2xl font-bold">In progress | </span><span id="InprogressCount" class="text-2xl font-bold">0</span>
+            <hr class="mb-6 h-1 rounded-lg bg-gray-700">
             <div id="inprogressTasks">
             
             </div>
         </div>
-        <div>
-            <span class="text-2xl font-bold">Done | </span><span class="text-2xl font-bold">0</span>
-            <hr class="mb-6 h-1.5 rounded-lg bg-gray-700">
+        <div class=" border-2 border-black rounded-md min-h-96 bg-gray-300  p-3 mb-4">
+            <span class="text-2xl font-bold">Done | </span><span id="doneCount" class="text-2xl font-bold">0</span>
+            <hr class="mb-6 h-1 rounded-lg bg-gray-700">
             <div id="doneTasks">
             
             </div>
         </div>
     </section>
-    
+        
     <section>
 
 
     </section>
+    <footer><div class="bg-black min-h-20 w-full"></div></footer>
     
     <script src="script.js"></script>
 </body>
